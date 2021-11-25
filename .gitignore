@@ -1,0 +1,6 @@
+poetry.lock
+pyproject.toml
+*.png
+*.jpg
+*.jpeg
+/__pycache__
