@@ -1,17 +1,20 @@
 import Image
+import time
 from picmaker import makeTestImage as mti   #Imports our random image generator from our other file and changes its name from "makeTestImage" to "mti" because it is more compact and ths faster to type
 
 mti(input("How wide?: "),input("How tall?: "))    #User tells the program how large the test image should be
 
 def ScaleImage(file):   #This large function allows the user to specify any image in the programs folder and upscale it using the algorithm
-  imgSource = Image.open(file)
+  start = time.time()   #Records the time the cycle starts at
+
+  imgSource = Image.open(file)    #Opens the image we want to upscale
   sipx = (imgSource.size[0]*2, imgSource.size[1]*2)
   imgTemp = Image.new('RGBA', sipx, (0,0,0,0))    #Here we create a new blank transparent image as our canvas for expansion
   imgOutput = imgTemp.load()
   px1 = imgSource.size[0]
   px2 = imgSource.size[1]
-  for x in range(px2):
-    for y in range(px1):    #Also iterates thorugh the source image
+  for x in range(px1):
+    for y in range(px2):    #Also iterates thorugh the source image
       cpx1 = (x*2,y*2)    #Gets every other pixel of every other row
       cpx2 = (x,y)
       imgTemp.putpixel(cpx1, imgSource.getpixel(cpx2))    #Puts the pixel of the source image onto its corresponding pixel in the canvas, but moved one pixel away from the previous and when a new row is reached it will skip a row. This results in a staggered pattern of pixels if the program stops here.
@@ -58,8 +61,9 @@ def ScaleImage(file):   #This large function allows the user to specify any imag
           else:
             dummy7 = (int(dummy4[0]/2), int(dummy4[1]/2), int(dummy4[2]/2), 255)
           imgTemp.putpixel(xpx3,dummy7)   #And then we set teh pixel in the middle of the 4 pixels we tested to the average of all 4 pixels, which fills in the patchwork pattern and completes our upscaling algorithm.
-
-
-
   imgTemp.save("output.png")    #Finally we save the image so it can be opened and viewed
-ScaleImage(input("What file? remeber to type in the file extension as well, for example \"cabbage.png\" -> "))    #This line allows the user to input the name of a file when they run the program
+
+  end = time.time()
+  print("completed in " + str(end-start) + " seconds") #Compares start and end time to give stats on cycle time
+
+ScaleImage(input("\n" + "What file? remeber to type in the file extension as well, for example cabbage.png -> " + "\n"))    #This line allows the user to input the name of a file when they run the program

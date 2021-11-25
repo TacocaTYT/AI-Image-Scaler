@@ -6,7 +6,7 @@ def rng():    #Generates a set of random values for the Red, Green, and Blue cha
   rvG = r(0,256)
   rvB = r(0,256)
   rvA = 255   #Sets the Alpha to 255
-  rv = (rvR,rvG,rvG,rvA)    #Converts to Tuple
+  rv = (rvR,rvG,rvB,rvA)    #Converts to Tuple
   return(rv)    #Returns the Tuple, exposing it as the output value of this constructor function
 
 def makeTestImage(x,y):   #Generates a random image
