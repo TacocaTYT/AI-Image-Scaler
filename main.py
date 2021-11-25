@@ -1,5 +1,5 @@
 import Image
-from picmaker import makeTestImage as mti
+from picmaker import makeTestImage as mti   #Imports our random image generator from our other file and changes its name from "makeTestImage" to "mti" because it is more compact and ths faster to type
 
 mti(input("How wide?: "),input("How tall?: "))    #User tells the program how large the test image should be
 
